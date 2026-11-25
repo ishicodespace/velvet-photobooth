@@ -164,10 +164,10 @@ async function finishStrip() {
   strip.width = 768;
   strip.height = 1800;
   const ctx = strip.getContext("2d");
-  ctx.fillStyle = "#faf6ed";
+  ctx.fillStyle = "#FFF0DC";
   ctx.fillRect(0, 0, strip.width, strip.height);
   photos.forEach((photo, index) => ctx.drawImage(photo, 24, 24 + index * 552));
-  ctx.fillStyle = "#681925";
+  ctx.fillStyle = "#790B13";
   ctx.textAlign = "center";
   ctx.font = '17px "DM Sans", Arial, sans-serif';
   ctx.fillText(new Date().toLocaleDateString(undefined, { day: "numeric", month: "short", year: "numeric" }), 384, 1777);
