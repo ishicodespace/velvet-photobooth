@@ -1,0 +1,92 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="theme-color" content="#f5f0e6">
+  <meta name="description" content="Step into The Velvet Booth for three black-and-white portraits and a keepsake photo strip.">
+  <title>The Velvet Booth · Digital Photo Booth</title>
+  <link rel="icon" type="image/png" href="assets/velvet-camera.png">
+  <link rel="stylesheet" href="style.css">
+  <script src="booth.js" defer></script>
+</head>
+<body>
+  <svg class="symbols" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+    <symbol id="i-camera" viewBox="0 0 24 24"><path d="M3 6.7h4.3L9 4h6l1.8 2.7H21a1.6 1.6 0 0 1 1.6 1.6v10.1A1.6 1.6 0 0 1 21 20H3a1.6 1.6 0 0 1-1.6-1.6V8.3A1.6 1.6 0 0 1 3 6.7Z"/><circle cx="12" cy="13" r="4.3"/><path d="M18.1 9.3h1.4"/></symbol>
+    <symbol id="i-curtain" viewBox="0 0 28 28"><path d="M2 4h24M3 6c3.6 2.6 7.4 2.9 11 0 3.6 2.9 7.4 2.6 11 0M3 7v17h5l-2-8c3.5-2.2 5-5.2 5.4-7.5M25 7v17h-5l2-8c-3.5-2.2-5-5.2-5.4-7.5M3 16l3-.3m16 0 3 .3"/></symbol>
+    <symbol id="i-strip" viewBox="0 0 28 28"><g transform="rotate(10 14 14)"><rect x="7.5" y="2" width="13" height="24" rx=".7"/><path d="M10 5h8v4.2h-8zM10 11h8v4.2h-8zM10 17h8v4.2h-8z"/></g></symbol>
+    <symbol id="i-lock" viewBox="0 0 24 24"><rect x="5.2" y="10" width="13.6" height="10" rx="2"/><path d="M8.5 10V7a3.5 3.5 0 0 1 7 0v3M12 14v2"/></symbol>
+    <symbol id="i-play" viewBox="0 0 24 24"><path fill="currentColor" stroke="none" d="M7 4.5 19 12 7 19.5z"/></symbol>
+    <symbol id="i-pause" viewBox="0 0 24 24"><path fill="currentColor" stroke="none" d="M6 5h4v14H6zm8 0h4v14h-4z"/></symbol>
+    <symbol id="i-download" viewBox="0 0 24 24"><path d="M12 3v12m-5-5 5 5 5-5M4 16v4h16v-4"/></symbol>
+    <symbol id="i-close" viewBox="0 0 24 24"><path d="m6 6 12 12M18 6 6 18"/></symbol>
+  </svg>
+  <header class="masthead">
+    <div class="wrap header-inner">
+      <a class="brand" href="./" aria-label="The Velvet Booth home">
+        <img class="brand-icon" src="assets/velvet-camera.png" width="64" height="64" alt="">
+        <span>Velvet <em>Booth</em></span>
+      </a>
+      <div class="sound">
+        <button class="record-player" id="music-toggle" aria-controls="music-panel" aria-expanded="false" aria-label="Play Take Me to Church by Hozier">
+          <span class="vinyl" aria-hidden="true"></span><span class="track"><b>Take Me to Church</b><small>Hozier</small></span>
+          <span class="play-icon"><svg class="ico"><use id="music-icon" href="#i-play"/></svg></span>
+        </button>
+        <aside class="music-panel" id="music-panel" hidden aria-label="Take Me to Church music player">
+          <div class="panel-top"><strong>Booth soundtrack</strong><button class="icon-button" id="music-close" aria-label="Close music player"><svg class="ico"><use href="#i-close"/></svg></button></div>
+          <div id="player-box"><div id="spotify"></div></div>
+          <a href="https://www.youtube.com/watch?v=PVjiKRfKpPI&amp;t=0s" target="_blank" rel="noopener">Hear the full recording from 0:00</a>
+        </aside>
+      </div>
+    </div>
+  </header>
+  <main class="wrap">
+    <section id="booth" class="hero" aria-labelledby="hero-title">
+      <div class="hero-copy">
+        <h1 id="hero-title">The Velvet<br><em>Booth.</em></h1>
+        <button id="enter" class="primary"><svg class="ico"><use href="#i-camera"/></svg>Enter the booth</button>
+      </div>
+      <div class="collage" role="group" aria-label="A vintage red photo booth and a sample three-photo strip">
+        <figure class="booth-print">
+          <span class="tape" aria-hidden="true"></span>
+          <div class="film"><video id="booth-film" poster="assets/booth.jpg" muted playsinline loop preload="metadata" aria-label="A slow close-up of the vintage booth"><source src="assets/booth.mp4" type="video/mp4"></video><button id="film-toggle" class="film-control" aria-label="Pause booth film"><svg class="ico"><use href="#i-pause"/></svg></button></div>
+        </figure>
+        <figure class="sample-strip" aria-label="Three black-and-white sample portraits"><span class="strip-tape" aria-hidden="true"></span><img src="assets/pose-1.jpg" alt=""><img src="assets/pose-2.jpg" alt=""><img src="assets/pose-3.jpg" alt=""></figure>
+      </div>
+    </section>
+    <section id="session" class="session" hidden aria-label="Camera booth">
+      <div class="session-grid">
+        <div class="capture-side">
+          <div class="camera-shell">
+            <img class="camera-body" src="assets/compact-camera.webp" width="1200" height="710" alt="">
+            <div class="viewfinder"><video id="camera" muted autoplay playsinline></video><div class="guides" aria-hidden="true"></div><span class="count" id="count" aria-hidden="true"></span><span id="flash"></span><p id="view-message">Opening your camera…</p></div>
+            <img class="sticker star-sticker" src="assets/booth-stars.webp" alt="">
+          </div>
+          <div class="capture-controls"><button class="primary" id="shutter" disabled><svg class="ico"><use href="#i-camera"/></svg><span id="shutter-label">Capture</span></button><span id="capture-status" class="status" role="status"></span></div>
+        </div>
+        <aside class="strip-side" aria-label="Photo strip preview">
+          <div class="live-strip" id="live-strip">
+            <img class="sticker bow-sticker" src="assets/booth-bow.webp" alt="">
+            <div class="slot">01</div>
+            <div class="slot">02</div>
+            <div class="slot">03</div>
+            <img class="sticker cat-sticker" src="assets/booth-cat.webp" alt="">
+          </div>
+        </aside>
+      </div>
+    </section>
+    <section id="result" class="result" hidden aria-label="Your finished photo strip" tabindex="-1">
+      <div class="dispenser">
+        <div class="output-slot" aria-hidden="true"></div>
+        <div class="paper-path">
+          <img id="finished-strip" width="768" height="1800" alt="Your finished strip of three warm monochrome portraits">
+        </div>
+      </div>
+      <a class="primary" id="save" download="velvet-booth-strip.png">
+        <svg class="ico" aria-hidden="true"><use href="#i-download"/></svg>
+        Download strip
+      </a>
+    </section>
+  </main>
+</body>
+</html>
